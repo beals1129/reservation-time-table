@@ -7,7 +7,7 @@ interface Props {
   startNum: number;
   endNum: number;
   maxTime: number;
-  complete: number[];
+  complete?: number[];
 }
 
 const TimeTableBox = ({ startNum, endNum, maxTime, complete }: Props) => {
