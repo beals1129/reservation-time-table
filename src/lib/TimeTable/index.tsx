@@ -8,9 +8,16 @@ interface Props {
   endNum: number;
   maxTime: number;
   complete?: number[];
+  onClick?: any;
 }
 
-const TimeTableBox = ({ startNum, endNum, maxTime, complete }: Props) => {
+const TimeTableBox = ({
+  startNum,
+  endNum,
+  maxTime,
+  complete,
+  onClick,
+}: Props) => {
   const [isOnFocus, setIsFocus] = useState<number | undefined>(-1);
   const [clickTime, setClickTime] = useState<any>([-1, null]);
 
@@ -66,7 +73,7 @@ const TimeTableBox = ({ startNum, endNum, maxTime, complete }: Props) => {
   };
   useEffect(() => {
     for (let i = startTimeSet; i < startTimeSet + maxTime; i++) {
-      if (completeReser.indexOf(i) !== -1) {
+      if (completeReser && completeReser?.indexOf(i) !== -1) {
         setNearbyCompleteTime(i);
 
         break;
@@ -74,6 +81,9 @@ const TimeTableBox = ({ startNum, endNum, maxTime, complete }: Props) => {
       setNearbyCompleteTime(null);
     }
   }, [startTimeSet]);
+  useEffect(() => {
+    onClick(clickTime);
+  }, [clickTime]);
   return (
     <TableWrap>
       {arrayList.map((el, idx) => (
@@ -82,10 +92,12 @@ const TimeTableBox = ({ startNum, endNum, maxTime, complete }: Props) => {
           onMouseEnter={() => setIsFocus(el)}
           onMouseLeave={() => setIsFocus(-1)}
           onClick={() =>
-            completeReser.indexOf(el) !== -1 ? null : TimeListSetting(el)
+            completeReser && completeReser?.indexOf(el) !== -1
+              ? null
+              : TimeListSetting(el)
           }
           className={
-            completeReser.indexOf(el) !== -1
+            completeReser && completeReser.indexOf(el) !== -1
               ? "disabled"
               : startTimeSet === el
               ? "startTime"
