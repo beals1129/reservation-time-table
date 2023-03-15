@@ -1,6 +1,6 @@
 {
   "name": "reservation-time-table",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,6 +19,7 @@
     "type": "git",
     "url": "https://github.com/beals1129/reservation-time-table"
   },
+  "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
